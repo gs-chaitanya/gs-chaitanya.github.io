@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gambali Seshasai Chaitanya | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' };</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Animation for sections fading in on scroll */
+        body { font-family: 'Inter', sans-serif; }
         .fade-in-section {
             opacity: 0;
             transform: translateY(20px);
@@ -22,296 +20,798 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Dark mode — CSS fallback (guarantees toggle works regardless of Tailwind re-scan timing) */
+        html.dark body                                    { background: linear-gradient(135deg, #020617 0%, #0f172a 60%, #1e1b4b 100%) !important; min-height: 100vh; color: #cbd5e1 !important; }
+        html.dark .page-wrapper                           { background-color: #0f172a !important; }
+        html.dark .main-panel                             { background-color: #0f172a !important; }
+        html.dark .main-panel .bg-slate-50,
+        html.dark .main-panel .bg-white                  { background-color: #1e293b !important; }
+        html.dark .main-panel .text-slate-900             { color: #f8fafc !important; }
+        html.dark .main-panel .text-slate-800             { color: #f1f5f9 !important; }
+        html.dark .main-panel .text-slate-700             { color: #e2e8f0 !important; }
+        html.dark .main-panel .text-slate-600             { color: #cbd5e1 !important; }
+        html.dark .main-panel .text-slate-500             { color: #94a3b8 !important; }
+        html.dark .main-panel .border-slate-200           { border-color: #334155 !important; }
+        html.dark .main-panel .text-teal-600              { color: #2dd4bf !important; }
+        html.dark .main-panel .text-indigo-600            { color: #818cf8 !important; }
+        html.dark .main-panel .text-purple-600            { color: #c084fc !important; }
+        html.dark .main-panel .text-orange-600            { color: #fb923c !important; }
+        html.dark .main-panel .text-emerald-600           { color: #34d399 !important; }
+        html.dark .main-panel .text-teal-500              { color: #2dd4bf !important; }
+        html.dark .main-panel .bg-green-100               { background-color: rgba(21,128,61,0.25) !important; }
+        html.dark .main-panel .text-green-800             { color: #86efac !important; }
+        html.dark .main-panel .bg-sky-100                 { background-color: rgba(7,89,133,0.25) !important; }
+        html.dark .main-panel .text-sky-800               { color: #7dd3fc !important; }
+        html.dark .main-panel .bg-emerald-100             { background-color: rgba(6,95,70,0.25) !important; }
+        html.dark .main-panel .text-emerald-800           { color: #6ee7b7 !important; }
+        html.dark .main-panel .text-emerald-400           { color: #34d399 !important; }
+
+        /* Accordion */
+        .exp-details {
+            max-height: 0;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .exp-details.open {
+            /* max-height set dynamically via JS */
+        }
+        .exp-chevron.rotated {
+            transform: rotate(180deg);
+        }
+        html.dark .main-panel .bg-teal-100                { background-color: rgba(19,78,74,0.25) !important; }
+        html.dark .main-panel .text-teal-800              { color: #5eead4 !important; }
+        html.dark .main-panel .bg-teal-50                 { background-color: rgba(20,184,166,0.1) !important; }
+        html.dark .main-panel .text-teal-700              { color: #2dd4bf !important; }
+        html.dark .main-panel .text-teal-400              { color: #2dd4bf !important; }
+        html.dark .main-panel .bg-slate-100               { background-color: #334155 !important; }
+        html.dark .main-panel a.text-teal-600             { color: #2dd4bf !important; }
+        html.dark footer                                  { color: #64748b !important; }
+        html.dark #theme-toggle:hover                     { background-color: #1e293b !important; }
+
+        /* ── Nav underline animation ── */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #14b8a6, #6366f1);
+            border-radius: 999px;
+            transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* ── Accordion open card highlight ── */
+        .exp-card.is-open {
+            box-shadow: 0 4px 20px rgba(20,184,166,0.12), 0 1px 4px rgba(0,0,0,0.06);
+        }
+        html.dark .exp-card.is-open {
+            box-shadow: 0 4px 20px rgba(20,184,166,0.18), 0 1px 6px rgba(0,0,0,0.3);
+        }
+        .exp-card.is-open .exp-header {
+            background: rgba(20,184,166,0.03);
+        }
+        html.dark .exp-card.is-open .exp-header {
+            background: rgba(20,184,166,0.07) !important;
+        }
+
+        /* ── Achievements cards ── */
+        .ach-card {
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .ach-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+            transform: translateX(3px);
+        }
+        html.dark .ach-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-slate-700">
+<body class="bg-gradient-to-br from-slate-100 via-white to-blue-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/60 text-slate-700 dark:text-slate-300 transition-colors duration-300">
 
-    <!-- Main Container -->
     <div class="max-w-7xl mx-auto my-8 lg:my-16 p-4">
-        <div class="bg-white rounded-2xl shadow-2xl shadow-slate-300/40 overflow-hidden lg:grid lg:grid-cols-12">
-            
+        <div class="page-wrapper bg-white dark:bg-slate-900 rounded-2xl shadow-2xl shadow-slate-300/40 dark:shadow-slate-900/60 overflow-hidden lg:grid lg:grid-cols-12">
+
             <!-- Sidebar -->
             <aside class="col-span-12 lg:col-span-4 p-8 bg-gradient-to-br from-slate-800 to-slate-900 text-slate-100">
                 <div class="sticky top-8">
                     <div class="flex flex-col items-center lg:items-start">
-                        <!-- Profile Image -->
                         <div class="w-32 h-32 rounded-full mb-4 ring-4 ring-offset-4 ring-offset-slate-800 ring-teal-500 overflow-hidden">
-                             <!-- 
-                                Instructions for your photo:
-                                1. Replace the 'src' attribute below with the path to your photo.
-                                2. For example: src="my-photo.jpg"
-                                3. Make sure to upload your photo to the same GitHub repository.
-                             -->
-                             <img 
-                                 src="cropped_circle_image.png" 
-                                 alt="Gambali Seshasai Chaitanya" 
-                                 class="w-full h-full object-cover"
-                             >
+                            <img src="cropped_circle_image.png" alt="Gambali Seshasai Chaitanya" class="w-full h-full object-cover">
                         </div>
-                        <h1 class="text-3xl font-bold text-white text-center lg:text-left">Gambali Seshasai Chaitanya</h1>
-                        <p class="mt-2 text-lg text-teal-300 text-center lg:text-left">Electronics and Communication Engineering</p>
-                        <p class="text-slate-400 text-center lg:text-left">Indian Institute of Technology (BHU) Varanasi</p>
+                        <h1 class="text-4xl font-bold text-white text-center lg:text-left tracking-tight leading-tight">Gambali Seshasai Chaitanya</h1>
+                        <p class="mt-2 text-base font-medium text-teal-300 text-center lg:text-left tracking-wide">Electronics &amp; Communication Engineering</p>
+                        <p class="text-sm text-slate-400 text-center lg:text-left">Indian Institute of Technology (BHU) Varanasi</p>
+                        <div class="mt-3 flex items-center gap-2 bg-teal-500/20 border border-teal-500/40 text-teal-300 text-sm font-medium px-3 py-1.5 rounded-full">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-teal-400"></span>
+                            </span>
+                            Currently at NUS, Singapore
+                        </div>
                     </div>
 
+                    <!-- Contact -->
                     <div class="mt-8">
                         <h2 class="text-xl font-semibold text-white border-b-2 border-slate-600 pb-2">Contact</h2>
                         <ul class="mt-4 space-y-3">
                             <li class="flex items-center group">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-teal-400 group-hover:text-white transition-colors"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-teal-400 shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                                 <span>+91-9350329257</span>
                             </li>
                             <li class="flex items-center group">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-teal-400 group-hover:text-white transition-colors"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                <a href="mailto:gseshasai.chaitanya.cd.ece22@iitbhu.ac.in" class="hover:text-teal-300 transition-colors">Email</a>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-teal-400 shrink-0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                <a href="mailto:gseshasai.chaitanya.cd.ece22@iitbhu.ac.in" class="hover:text-teal-300 transition-colors break-all">gseshasai.chaitanya.cd<br>.ece22@iitbhu.ac.in</a>
                             </li>
                             <li class="flex items-center group">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-teal-400 group-hover:text-white transition-colors"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                                <a href="#" class="hover:text-teal-300 transition-colors">GitHub</a>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-teal-400 shrink-0"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                <a href="https://github.com/gs-chaitanya/" target="_blank" rel="noopener noreferrer" class="hover:text-teal-300 transition-colors">GitHub</a>
                             </li>
-                             <li class="flex items-center group">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-teal-400 group-hover:text-white transition-colors"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                                <a href="#" class="hover:text-teal-300 transition-colors">LinkedIn</a>
+                            <li class="flex items-center group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-teal-400 shrink-0"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                <a href="https://www.linkedin.com/in/gs-chaitanya" target="_blank" rel="noopener noreferrer" class="hover:text-teal-300 transition-colors">LinkedIn</a>
+                            </li>
+                            <li class="flex items-center group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-teal-400 shrink-0"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                <a href="https://scholar.google.com/citations?user=aC66lQQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="hover:text-teal-300 transition-colors">Google Scholar</a>
                             </li>
                         </ul>
                     </div>
-                    
+
+                    <!-- Resume Button -->
                     <div class="mt-8">
-                         <a href="2025_resume_June.pdf" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-teal-500 text-white font-semibold py-3 px-4 rounded-lg hover:bg-teal-600 transition-all duration-300 flex items-center justify-center">
+                        <a href="2026_resume.pdf" target="_blank" rel="noopener noreferrer" class="block w-full text-center bg-teal-500 text-white font-semibold py-3 px-4 rounded-lg hover:bg-teal-600 transition-all duration-300 flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                             <span>View Full Resume</span>
-                         </a>
-                         <!-- 
-                            Instructions for your resume PDF:
-                            1. Make sure your resume file is named '2025_resume_June.pdf'.
-                            2. Upload this PDF file to the same GitHub repository as this index.html file.
-                         -->
+                            <span>View Full Resume</span>
+                        </a>
                     </div>
 
+                    <!-- Talk to me about -->
+                    <div class="mt-5 p-3 bg-slate-700/50 rounded-lg">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Talk to me about</p>
+                        <ul class="text-sm text-slate-300 space-y-1">
+                            <li>· Side-channel security &amp; hardware taint tracking</li>
+                            <li>· Neuromorphic circuits (ReRAM, FeFET)</li>
+                            <li>· Open-source EDA (OpenROAD, Yosys)</li>
+                            <li>· GSoC / Linux Foundation Mentorship</li>
+                            <li>· Research collaborations</li>
+                        </ul>
+                    </div>
 
+                    <!-- Skills -->
+                    <div class="mt-8">
+                        <h2 class="text-xl font-semibold text-white border-b-2 border-slate-600 pb-2">Skills</h2>
+                        <div class="mt-4 space-y-3">
+                            <div>
+                                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Languages</p>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">Verilog / SV</span>
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">C / C++</span>
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">Python</span>
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">Embedded C</span>
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">TCL</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">EDA & Tools</p>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">OpenROAD</span>
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">Cadence</span>
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">Vivado</span>
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">Xilinx SDK</span>
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">Yosys</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Platforms</p>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">RISC-V</span>
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">FPGA</span>
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">Embedded Linux</span>
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">AXI-4</span>
+                                    <span class="bg-slate-700 text-slate-200 text-xs font-medium px-2.5 py-1 rounded-md">ONFI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
                     <div class="mt-8">
                         <h2 class="text-xl font-semibold text-white border-b-2 border-slate-600 pb-2">Education</h2>
                         <div class="mt-4 space-y-4">
                             <div>
-                                <p class="font-semibold">B.Tech, ECE (2022-2026)</p>
+                                <p class="font-semibold">B.Tech, ECE (2022–2026)</p>
                                 <p class="text-slate-400">IIT (BHU) Varanasi</p>
-                                <p class="text-sm text-slate-300">CGPA: 8.45 (Till 6th Sem)</p>
+                                <p class="text-sm text-slate-300">CGPA: 8.43 (Till 7th Sem)</p>
                             </div>
                             <div>
                                 <p class="font-semibold">Senior Secondary (2021)</p>
                                 <p class="text-slate-400">St. Francis School, Indirapuram</p>
-                                <p class="text-sm text-slate-300">96.8%</p>
+                                <p class="text-sm text-slate-300">96.8% — CBSE</p>
                             </div>
                             <div>
                                 <p class="font-semibold">Matriculation (2019)</p>
                                 <p class="text-slate-400">St. Francis School, Indirapuram</p>
-                                <p class="text-sm text-slate-300">97%</p>
+                                <p class="text-sm text-slate-300">97% — CBSE</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </aside>
-            
+
             <!-- Main Content -->
-            <main class="col-span-12 lg:col-span-8 p-6 lg:p-10">
-                <nav class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-10 pb-4 border-b border-slate-200">
-                    <a href="#experience" class="text-slate-600 hover:text-teal-600 font-semibold transition-colors">Experience</a>
-                    <a href="#publications" class="text-slate-600 hover:text-teal-600 font-semibold transition-colors">Publications</a>
-                    <a href="#projects" class="text-slate-600 hover:text-teal-600 font-semibold transition-colors">Projects</a>
-                    <a href="#achievements" class="text-slate-600 hover:text-teal-600 font-semibold transition-colors">Achievements</a>
-                    <a href="2025_resume_June.pdf" target="_blank" rel="noopener noreferrer" class="text-slate-600 hover:text-teal-600 font-semibold transition-colors flex items-center">
-                        Resume
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <main class="main-panel col-span-12 lg:col-span-8 p-6 lg:p-10 dark:bg-slate-900">
+
+                <!-- About / Research Statement -->
+                <div class="mb-8 p-5 rounded-xl border border-teal-100 dark:border-teal-900/40 bg-gradient-to-br from-teal-50/60 to-indigo-50/40 dark:from-teal-900/10 dark:to-indigo-900/10">
+                    <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                        I'm a final-year ECE undergrad at IIT (BHU) Varanasi, currently a visiting researcher at NUS working on FPGA-based hardware security. My research spans
+                        <span class="font-semibold text-teal-600 dark:text-teal-400">microarchitectural side-channel analysis</span>,
+                        <span class="font-semibold text-indigo-600 dark:text-indigo-400">neuromorphic computing with ReRAM &amp; FeFET</span>, and
+                        <span class="font-semibold text-purple-600 dark:text-purple-400">open-source EDA tooling</span>.
+                        Two-time Google Summer of Code contributor (OpenROAD &amp; Apertium) and Linux Foundation Mentee.
+                    </p>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <span class="bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 text-xs font-semibold px-2.5 py-1 rounded-full">Hardware Security</span>
+                        <span class="bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-full">Neuromorphic Computing</span>
+                        <span class="bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 text-xs font-semibold px-2.5 py-1 rounded-full">ReRAM / NVM</span>
+                        <span class="bg-sky-100 dark:bg-sky-900/40 text-sky-700 dark:text-sky-300 text-xs font-semibold px-2.5 py-1 rounded-full">FPGA Design</span>
+                        <span class="bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 text-xs font-semibold px-2.5 py-1 rounded-full">EDA Tooling</span>
+                        <span class="bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300 text-xs font-semibold px-2.5 py-1 rounded-full">RISC-V</span>
+                        <span class="bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold px-2.5 py-1 rounded-full">NAND Flash</span>
+                        <span class="bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 text-xs font-semibold px-2.5 py-1 rounded-full">Posit Arithmetic</span>
+                    </div>
+                </div>
+
+                <nav class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-10 pb-4 border-b border-slate-200 dark:border-slate-700">
+                    <a href="#experience" class="nav-link text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 font-semibold transition-colors">Experience</a>
+                    <a href="#research" class="nav-link text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 font-semibold transition-colors">Research</a>
+                    <a href="projects.html" class="nav-link text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 font-semibold transition-colors flex items-center gap-1">
+                        Projects
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                     </a>
+                    <a href="#achievements" class="nav-link text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 font-semibold transition-colors">Achievements</a>
+                    <a href="2026_resume.pdf" target="_blank" rel="noopener noreferrer" class="nav-link text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 font-semibold transition-colors flex items-center gap-1">
+                        Resume
+                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </a>
+                    <!-- Dark mode toggle -->
+                    <button id="theme-toggle" aria-label="Toggle dark mode" class="ml-auto p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <!-- Sun icon (shown in dark mode) -->
+                        <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                        <!-- Moon icon (shown in light mode) -->
+                        <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    </button>
                 </nav>
-                
+
                 <!-- Experience Section -->
                 <section id="experience" class="mb-12 fade-in-section">
-                    <h2 class="text-3xl font-bold text-slate-800 pb-2 mb-6">Experience</h2>
-                    <div class="space-y-6">
-                        <!-- Experience Card -->
-                        <div class="p-6 bg-slate-50 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <h3 class="text-xl font-semibold text-slate-900">Embedded Systems Intern</h3>
-                            <p class="font-medium text-teal-600">Jaguar Land Rover | Bengaluru, Karnataka</p>
-                            <p class="text-sm text-slate-500 mt-1">May 2025 – July 2025</p>
-                            <ul class="list-disc list-outside text-slate-600 mt-2 ml-4 space-y-1">
-                                <li>Designed and implemented a secure two-stage bootloader architecture with Root of Trust and Digital Signature verification.</li>
-                                <li>Incorporated AES decryption capabilities to protect sensitive IP in compiled firmware binaries.</li>
-                                <li>Optimized the bootloader design for low runtime memory usage and heap utilization for resource-constrained environments.</li>
-                            </ul>
+                    <h2 class="text-4xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">Experience</h2>
+                    <div class="h-1 w-14 bg-gradient-to-r from-teal-500 to-indigo-500 rounded-full mt-2 mb-6"></div>
+                    <div class="space-y-2" id="exp-list">
+
+                        <!-- NUS -->
+                        <div class="exp-card rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 border-l-4 border-l-teal-500 shadow-sm">
+                            <button class="exp-header w-full flex items-center gap-4 p-5 text-left bg-white dark:bg-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-750 transition-colors">
+                                <div class="w-16 h-16 rounded-xl shrink-0 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 shadow-sm flex items-center justify-center overflow-hidden p-1.5">
+                                    <img src="https://logo.clearbit.com/nus.edu.sg" alt="NUS" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='logos/NUS.jpg'">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-slate-800 dark:text-slate-100 text-base leading-snug">Visiting Student Researcher</p>
+                                    <p class="text-teal-600 dark:text-teal-400 text-sm font-semibold truncate">National University of Singapore</p>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 italic">with Prof. Flavien Solt · Singapore</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-1.5 shrink-0">
+                                    <span class="text-xs text-slate-400 dark:text-slate-500 whitespace-nowrap">Jan 2026 – Present</span>
+                                    <svg class="exp-chevron w-4 h-4 text-slate-400 transition-transform duration-300 ease-in-out" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </div>
+                            </button>
+                            <div class="exp-details overflow-hidden bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700/60">
+                                <ul class="list-disc list-outside text-slate-600 dark:text-slate-300 text-base ml-4 space-y-2 px-5 pb-5 pt-3.5 pl-[5rem] leading-relaxed">
+                                    <li>Working towards developing FPGA-friendly approaches for microarchitectural side-channel analysis that eliminate the need for explicit Dynamic Information Flow Tracking.</li>
+                                </ul>
+                            </div>
                         </div>
-                        <!-- Experience Card -->
-                        <div class="p-6 bg-slate-50 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <h3 class="text-xl font-semibold text-slate-900">Project Mentee</h3>
-                            <p class="font-medium text-teal-600">RISC-V International @ Linux Foundation Mentorship</p>
-                            <p class="text-sm text-slate-500 mt-1">March 2025 – June 2025</p>
-                            <ul class="list-disc list-outside text-slate-600 mt-2 ml-4 space-y-1">
-                                <li>Developed a Hardware Abstraction Layer Transitional Library for Software to Hardware Posits for RISC-V.</li>
-                                <li>Improved and delivered a new version of the SoftPosit-cpp Library with native support for posit arithmetic.</li>
-                                <li>Created CI/CD pipelines, a Python Wrapper for Soft Posits, and a Debian Package.</li>
-                            </ul>
+
+                        <!-- UC Berkeley -->
+                        <div class="exp-card rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 border-l-4 border-l-indigo-400 shadow-sm">
+                            <button class="exp-header w-full flex items-center gap-4 p-5 text-left bg-white dark:bg-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-750 transition-colors">
+                                <div class="w-16 h-16 rounded-xl shrink-0 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 shadow-sm flex items-center justify-center overflow-hidden p-1.5">
+                                    <img src="https://logo.clearbit.com/berkeley.edu" alt="UC Berkeley" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='logos/ucb.png'">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-slate-800 dark:text-slate-100 text-base leading-snug">Visiting Student Researcher</p>
+                                    <p class="text-indigo-600 dark:text-indigo-400 text-sm font-semibold truncate">University of California, Berkeley</p>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 italic">with Prof. Christopher Fletcher · California, USA</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-1.5 shrink-0">
+                                    <span class="text-xs text-slate-400 dark:text-slate-500 whitespace-nowrap">Sept 2025 – Jan 2026</span>
+                                    <svg class="exp-chevron w-4 h-4 text-slate-400 transition-transform duration-300 ease-in-out" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </div>
+                            </button>
+                            <div class="exp-details overflow-hidden bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700/60">
+                                <ul class="list-disc list-outside text-slate-600 dark:text-slate-300 text-base ml-4 space-y-2 px-5 pb-5 pt-3.5 pl-[5rem] leading-relaxed">
+                                    <li>Engaged in hardware security research to mitigate microarchitectural side-channel attacks by adapting the <span class="italic">MileSan</span> dynamic analysis framework for FPGA-accelerated RTL simulations.</li>
+                                </ul>
+                            </div>
                         </div>
-                         <!-- Experience Card -->
-                        <div class="p-6 bg-slate-50 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <h3 class="text-xl font-semibold text-slate-900">Software Development Intern</h3>
-                            <p class="font-medium text-teal-600">Google Summer of Code, 2025 (OpenROAD)</p>
-                            <p class="text-sm text-slate-500 mt-1">June 2025 – September 2025</p>
-                             <ul class="list-disc list-outside text-slate-600 mt-2 ml-4 space-y-1">
-                                <li>Contributing to OpenROAD, an open-source RTL2GDSII flow for digital IC design.</li>
-                                <li>Implementing support for polygonal floorplans, modifying user-facing TCL scripts, SWIG wrappers, and backend C++ logic.</li>
-                            </ul>
+
+                        <!-- GSoC 2025 -->
+                        <div class="exp-card rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 border-l-4 border-l-teal-500 shadow-sm">
+                            <button class="exp-header w-full flex items-center gap-4 p-5 text-left bg-white dark:bg-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-750 transition-colors">
+                                <div class="w-16 h-16 rounded-xl shrink-0 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 shadow-sm flex items-center justify-center overflow-hidden p-1.5">
+                                    <img src="https://logo.clearbit.com/google.com" alt="Google" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='logos/gsoc.png'">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-slate-800 dark:text-slate-100 text-base leading-snug">Software Development Intern</p>
+                                    <p class="text-teal-600 dark:text-teal-400 text-sm font-semibold truncate">Google Summer of Code 2025 · OpenROAD</p>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 italic">Remote</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-1.5 shrink-0">
+                                    <span class="text-xs text-slate-400 dark:text-slate-500 whitespace-nowrap">June – Sept 2025</span>
+                                    <svg class="exp-chevron w-4 h-4 text-slate-400 transition-transform duration-300 ease-in-out" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </div>
+                            </button>
+                            <div class="exp-details overflow-hidden bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700/60">
+                                <ul class="list-disc list-outside text-slate-600 dark:text-slate-300 text-base ml-4 space-y-2 px-5 pb-5 pt-3.5 pl-[5rem] leading-relaxed">
+                                    <li>Contributed to <strong>OpenROAD</strong>, an open-source RTL2GDSII flow for digital IC design. Implemented end-to-end support for rectilinear floorplans inside the flow.</li>
+                                    <li>Modified user-facing TCL scripts, intermediate SWIG wrappers, and the backend C++ logic to support polygonal floorplans.</li>
+                                </ul>
+                            </div>
                         </div>
+
+                        <!-- JLR -->
+                        <div class="exp-card rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 border-l-4 border-l-teal-500 shadow-sm">
+                            <button class="exp-header w-full flex items-center gap-4 p-5 text-left bg-white dark:bg-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-750 transition-colors">
+                                <div class="w-16 h-16 rounded-xl shrink-0 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 shadow-sm flex items-center justify-center overflow-hidden p-1.5">
+                                    <img src="https://logo.clearbit.com/jaguarlandrover.com" alt="JLR" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='logos/JLR.png'">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-slate-800 dark:text-slate-100 text-base leading-snug">Embedded Systems Intern</p>
+                                    <p class="text-teal-600 dark:text-teal-400 text-sm font-semibold truncate">Jaguar Land Rover</p>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 italic">Bengaluru, Karnataka</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-1.5 shrink-0">
+                                    <span class="text-xs text-slate-400 dark:text-slate-500 whitespace-nowrap">May – July 2025</span>
+                                    <svg class="exp-chevron w-4 h-4 text-slate-400 transition-transform duration-300 ease-in-out" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </div>
+                            </button>
+                            <div class="exp-details overflow-hidden bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700/60">
+                                <ul class="list-disc list-outside text-slate-600 dark:text-slate-300 text-base ml-4 space-y-2 px-5 pb-5 pt-3.5 pl-[5rem] leading-relaxed">
+                                    <li>Designed and implemented a <strong>secure two-stage bootloader architecture</strong> with Root of Trust and Digital Signature verification.</li>
+                                    <li>Incorporated <strong>AES decryption</strong> capabilities to protect sensitive IP in compiled firmware binaries.</li>
+                                    <li>Optimized the bootloader for low runtime memory usage and heap utilization for resource-constrained environments.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- RISC-V Linux Foundation -->
+                        <div class="exp-card rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 border-l-4 border-l-teal-500 shadow-sm">
+                            <button class="exp-header w-full flex items-center gap-4 p-5 text-left bg-white dark:bg-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-750 transition-colors">
+                                <div class="w-16 h-16 rounded-xl shrink-0 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 shadow-sm flex items-center justify-center overflow-hidden p-1.5">
+                                    <img src="https://logo.clearbit.com/riscv.org" alt="RISC-V" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='logos/rv.png'">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-slate-800 dark:text-slate-100 text-base leading-snug">Project Mentee</p>
+                                    <p class="text-teal-600 dark:text-teal-400 text-sm font-semibold truncate">RISC-V Intl. @ Linux Foundation Mentorship</p>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 italic">Remote · under Prof. Gyllinsky, Kurt Keville, Prof. Gustafson</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-1.5 shrink-0">
+                                    <span class="text-xs text-slate-400 dark:text-slate-500 whitespace-nowrap">Mar – June 2025</span>
+                                    <svg class="exp-chevron w-4 h-4 text-slate-400 transition-transform duration-300 ease-in-out" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </div>
+                            </button>
+                            <div class="exp-details overflow-hidden bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700/60">
+                                <ul class="list-disc list-outside text-slate-600 dark:text-slate-300 text-base ml-4 space-y-2 px-5 pb-5 pt-3.5 pl-[5rem] leading-relaxed">
+                                    <li>Developed a Hardware Abstraction Layer Transitional Library for Software to Hardware Posits for RISC-V. Selected for the Spring 2025 term of the Linux Foundation Mentorship Program.</li>
+                                    <li>Improved and delivered a new version of the SoftPosit-cpp Library with native posit arithmetic; implemented math functions for 8, 16, and 32-bit posits with benchmarks and unit tests.</li>
+                                    <li>Created CI/CD pipelines for automated building and packaging, a Python Wrapper for SoftPosits, and a Debian Package.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- University of Michigan -->
+                        <div class="exp-card rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 border-l-4 border-l-purple-400 shadow-sm">
+                            <button class="exp-header w-full flex items-center gap-4 p-5 text-left bg-white dark:bg-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-750 transition-colors">
+                                <div class="w-16 h-16 rounded-xl shrink-0 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 shadow-sm flex items-center justify-center overflow-hidden p-1.5">
+                                    <img src="https://logo.clearbit.com/umich.edu" alt="UMich" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='logos/umich.png'">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-slate-800 dark:text-slate-100 text-base leading-snug">Software Development Intern</p>
+                                    <p class="text-purple-600 dark:text-purple-400 text-sm font-semibold truncate">University of Michigan</p>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 italic">with Prof. Mehdi Saligane · Remote</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-1.5 shrink-0">
+                                    <span class="text-xs text-slate-400 dark:text-slate-500 whitespace-nowrap">Nov 2024 – Mar 2025</span>
+                                    <svg class="exp-chevron w-4 h-4 text-slate-400 transition-transform duration-300 ease-in-out" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </div>
+                            </button>
+                            <div class="exp-details overflow-hidden bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700/60">
+                                <ul class="list-disc list-outside text-slate-600 dark:text-slate-300 text-base ml-4 space-y-2 px-5 pb-5 pt-3.5 pl-[5rem] leading-relaxed">
+                                    <li>Worked on creating an ABC script to improve synthesis options in Yosys for creating a balanced synthesis plan, balancing between Speed and Area optimized synthesis.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- GSoC 2024 -->
+                        <div class="exp-card rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 border-l-4 border-l-teal-500 shadow-sm">
+                            <button class="exp-header w-full flex items-center gap-4 p-5 text-left bg-white dark:bg-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-750 transition-colors">
+                                <div class="w-16 h-16 rounded-xl shrink-0 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 shadow-sm flex items-center justify-center overflow-hidden p-1.5">
+                                    <img src="https://logo.clearbit.com/google.com" alt="Google" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='logos/gsoc.png'">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-slate-800 dark:text-slate-100 text-base leading-snug">Software Development Intern</p>
+                                    <p class="text-teal-600 dark:text-teal-400 text-sm font-semibold truncate">Google Summer of Code 2024 · Apertium</p>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 italic">Remote</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-1.5 shrink-0">
+                                    <span class="text-xs text-slate-400 dark:text-slate-500 whitespace-nowrap">May – Aug 2024</span>
+                                    <svg class="exp-chevron w-4 h-4 text-slate-400 transition-transform duration-300 ease-in-out" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </div>
+                            </button>
+                            <div class="exp-details overflow-hidden bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700/60">
+                                <ul class="list-disc list-outside text-slate-600 dark:text-slate-300 text-base ml-4 space-y-2 px-5 pb-5 pt-3.5 pl-[5rem] leading-relaxed">
+                                    <li>Contributed to <strong>Apertium</strong>, an open-source machine translation platform. Developed core tools with CLI utilities for automated bidirectional dictionary generation from parallel translated texts.</li>
+                                    <li>Experimented with word alignment methods including Bayesian models with Markov Chain Monte Carlo and Graph Neural Networks for multiparallel word alignment.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- IIT Bombay -->
+                        <div class="exp-card rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 border-l-4 border-l-orange-400 shadow-sm">
+                            <button class="exp-header w-full flex items-center gap-4 p-5 text-left bg-white dark:bg-slate-800 hover:bg-slate-50/80 dark:hover:bg-slate-750 transition-colors">
+                                <div class="w-16 h-16 rounded-xl shrink-0 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 shadow-sm flex items-center justify-center overflow-hidden p-1.5">
+                                    <img src="https://logo.clearbit.com/iitb.ac.in" alt="IIT Bombay" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='logos/iitb.png'">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-slate-800 dark:text-slate-100 text-base leading-snug">Summer Research Intern</p>
+                                    <p class="text-orange-600 dark:text-orange-400 text-sm font-semibold truncate">Indian Institute of Technology Bombay</p>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 italic">with Prof. Sandip Mondal · Bombay, India</p>
+                                </div>
+                                <div class="flex flex-col items-end gap-1.5 shrink-0">
+                                    <span class="text-xs text-slate-400 dark:text-slate-500 whitespace-nowrap">May – July 2024</span>
+                                    <svg class="exp-chevron w-4 h-4 text-slate-400 transition-transform duration-300 ease-in-out" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </div>
+                            </button>
+                            <div class="exp-details overflow-hidden bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700/60">
+                                <ul class="list-disc list-outside text-slate-600 dark:text-slate-300 text-base ml-4 space-y-2 px-5 pb-5 pt-3.5 pl-[5rem] leading-relaxed">
+                                    <li>Developed Verilog and Embedded C applications using Vivado and Xilinx SDK on a Digilent Zybo FPGA board for an <strong>FPGA-based controller</strong> to perform Read, Write, and Erase operations on 2D and 3D SLC and MLC raw NAND Flash Chips.</li>
+                                    <li>Used bit-banging to precisely control onboard GPIO pins via the ONFI Consortium Protocol. Developed programs in Embedded C on <strong>Embedded Linux</strong> on an Altera DE1 SoC.</li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
                 </section>
 
-                <!-- Publications Section -->
-                <section id="publications" class="mb-12 fade-in-section">
-                    <h2 class="text-3xl font-bold text-slate-800 pb-2 mb-6 flex items-center">
+                <!-- Research / Publications Section -->
+                <section id="research" class="mb-12 fade-in-section">
+                    <h2 class="text-3xl font-bold text-slate-800 dark:text-slate-100 tracking-tight flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 text-teal-500"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-                        Conferences & Publications
+                        Research
                     </h2>
-                    <div class="space-y-6">
-                        <!-- Publication Card 1 -->
-                        <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
-                            <h4 class="font-bold text-lg text-slate-800">A Non-Volatile ReRAM and Subthreshold-FET-Based Kernel for Energy-Efficient Temporal Signal Processing Using Reservoir Computing</h4>
-                            <p class="text-slate-600 mt-1"><strong>Chaitanya, G. S.</strong>, Arora, A. (2025)</p>
-                            <p class="text-sm text-slate-500 italic">23rd Non Volatile Memory Technology Symposium (NVMTS)</p>
-                            <div class="mt-3">
-                                <span class="inline-block bg-sky-100 text-sky-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Poster Presentation</span>
-                            </div>
-                        </div>
-                        <!-- Publication Card 2 -->
-                        <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
-                            <h4 class="font-bold text-lg text-slate-800">ReRAM-based Crossbar Compatible Equality Checker for Neuromorphic Applications</h4>
-                            <p class="text-slate-600 mt-1"><strong>Chaitanya, G. S.</strong>, Pande, S., Arora, A. (2024)</p>
-                            <p class="text-sm text-slate-500 italic">8th Students' Conference on Engineering & Systems (SCES)</p>
-                             <div class="mt-3">
-                                <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Oral Presentation</span>
-                            </div>
-                        </div>
-                        <!-- Publication Card 3 -->
-                        <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
-                            <h4 class="font-bold text-lg text-slate-800">ReRAM Crossbar Compatible Efficient Equality Checker and Half Adder Implementation</h4>
-                            <p class="text-slate-600 mt-1"><strong>Chaitanya, G. S.</strong>, Elangovan, V.</p>
-                            <p class="text-sm text-slate-500 italic">XXII International Workshop on Physics of Semiconductor Devices</p>
-                            <div class="mt-3">
-                                <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Oral Presentation</span>
-                            </div>
-                        </div>
-                        <!-- Publication Card 4 -->
-                        <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
-                            <h4 class="font-bold text-lg text-slate-800">Stress Induced Failure Mechanism in NAND Flash Memory Devices</h4>
-                            <p class="text-slate-600 mt-1"><strong>Chaitanya, G. S.</strong>, Weling, A., Mondal, S. (2025)</p>
-                            <p class="text-sm text-slate-500 italic">Electronic Materials Conference</p>
-                            <div class="mt-3">
-                                <span class="inline-block bg-sky-100 text-sky-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Poster Presentation</span>
-                            </div>
-                        </div>
-                        <!-- Publication Card 5 -->
-                        <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
-                            <h4 class="font-bold text-lg text-slate-800">Thermal-Induced Threshold Voltage Distribution Changes in 3D NAND Flash Cells: Experimental Characterization</h4>
-                            <p class="text-slate-600 mt-1">Weling, A., <strong>Chaitanya, G. S.</strong>, Mondal, S. (2025)</p>
-                            <p class="text-sm text-slate-500 italic">Electronic Materials Conference</p>
-                             <div class="mt-3">
-                                <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Oral Presentation</span>
-                            </div>
-                        </div>
-                        <!-- Publication Card 6 -->
-                        <div class="p-6 bg-white rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
-                            <h4 class="font-bold text-lg text-slate-800">Page and Block-wise Program Disturb Operation in NAND Flash Memory</h4>
-                            <p class="text-slate-600 mt-1">Khatun, A., <strong>Chaitanya, G. S.</strong>, Mondal, S. (2025)</p>
-                            <p class="text-sm text-slate-500 italic">Electronic Materials Conference</p>
-                            <div class="mt-3">
-                                <span class="inline-block bg-sky-100 text-sky-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Poster Presentation</span>
+                    <div class="h-1 w-14 bg-gradient-to-r from-teal-500 to-indigo-500 rounded-full mt-2 mb-2"></div>
+                    <p class="text-slate-500 dark:text-slate-400 mb-6 text-sm">
+                        Full list on
+                        <a href="https://scholar.google.com/citations?user=aC66lQQAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="text-teal-600 dark:text-teal-400 hover:underline font-medium">Google Scholar ↗</a>
+                    </p>
+
+                    <!-- Journals -->
+                    <h3 class="text-xl font-semibold text-slate-700 dark:text-slate-200 mb-4 flex items-center">
+                        <span class="inline-block w-3 h-3 rounded-full bg-emerald-500 mr-2"></span>
+                        Journals
+                    </h3>
+                    <div class="space-y-4 mb-8">
+                        <div class="p-5 bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-emerald-500">
+                            <h4 class="font-bold text-base text-slate-800 dark:text-slate-100 leading-snug">An Energy-Efficient, CMOS-Compatible Physical Reservoir Node with Post-Fabrication Tunable Decay Dynamics</h4>
+                            <p class="text-slate-600 dark:text-slate-300 mt-1 text-sm"><strong>Gambali Seshasai Chaitanya</strong>, Aditya D. Arkalgud, Shubham Pande, Ankit Arora</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 italic">IOP Neuromorphic Computing and Engineering &nbsp;·&nbsp; <span class="text-emerald-600 dark:text-emerald-400 font-semibold not-italic">Accepted</span></p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Journal</span>
+                                <a href="https://iopscience.iop.org/article/10.1088/2634-4386/ae2155/meta" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    IOP
+                                </a>
+                                <a href="research/IOP.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-teal-700 dark:text-teal-300 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                    PDF
+                                </a>
                             </div>
                         </div>
                     </div>
-                </section>
 
-                <!-- Projects Section -->
-                <section id="projects" class="mb-12 fade-in-section">
-                    <h2 class="text-3xl font-bold text-slate-800 pb-2 mb-6">Projects</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Project Card -->
-                        <div class="p-6 bg-slate-50 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-                            <h3 class="text-lg font-semibold text-slate-900">RISC-V CPU Implemented in Verilog HDL</h3>
-                            <p class="text-sm text-slate-500 mb-2">Jan 2024 – Apr 2024</p>
-                            <p class="flex-grow">Designed and implemented a RISC-V CPU from scratch, creating a microarchitecture, implementing the ISA, and optimizing performance through simulation tools.</p>
-                            <div class="mt-4">
-                                <span class="inline-block bg-teal-100 text-teal-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Verilog</span>
-                                <span class="inline-block bg-teal-100 text-teal-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">CPU Design</span>
-                                <span class="inline-block bg-teal-100 text-teal-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">RISC-V</span>
+                    <!-- Conferences -->
+                    <h3 class="text-xl font-semibold text-slate-700 dark:text-slate-200 mb-4 flex items-center">
+                        <span class="inline-block w-3 h-3 rounded-full bg-teal-500 mr-2"></span>
+                        Conferences &amp; Presentations
+                    </h3>
+                    <div class="space-y-4">
+
+                        <!-- Helper macro for paper link buttons — inlined per card -->
+
+                        <!-- ICEE 2025 -->
+                        <div class="p-5 bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
+                            <h4 class="font-bold text-base text-slate-800 dark:text-slate-100 leading-snug">Adaptive FeFET-Based LIF Neuron for Regression Tasks on Spiking Neural Networks</h4>
+                            <p class="text-slate-600 dark:text-slate-300 mt-1 text-sm"><strong>Gambali Seshasai Chaitanya</strong>, Aditya D. Arkalgud, Sourav De, Ankit Arora</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 italic">7th International Conference on Emerging Electronics (ICEE 2025)</p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Oral Presentation</span>
+                                <a href="https://ieeexplore.ieee.org/abstract/document/11409722" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    IEEE Xplore
+                                </a>
+                                <a href="research/icee2025.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-teal-700 dark:text-teal-300 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                    PDF
+                                </a>
                             </div>
                         </div>
-                         <!-- Project Card -->
-                         <div class="p-6 bg-slate-50 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-                            <h3 class="text-lg font-semibold text-slate-900">Neural Network Inference on FPGAs</h3>
-                             <p class="text-sm text-slate-500 mb-2">Jan 2024 – Apr 2024</p>
-                            <p class="flex-grow">Developed a CNN for edge computing, implementing a behavioral model of a neuron in Verilog to construct a fully connected network for inference on FPGAs.</p>
-                            <div class="mt-4">
-                                <span class="inline-block bg-teal-100 text-teal-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">FPGA</span>
-                                <span class="inline-block bg-teal-100 text-teal-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Verilog</span>
-                                <span class="inline-block bg-teal-100 text-teal-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">CNN</span>
+
+                        <!-- CoNGA 2025 -->
+                        <div class="p-5 bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
+                            <h4 class="font-bold text-base text-slate-800 dark:text-slate-100 leading-snug">Evaluating Numerical Formats for HPC Using Fractal Benchmarks</h4>
+                            <p class="text-slate-600 dark:text-slate-300 mt-1 text-sm">João Pedro Cabral Miranda, <strong>Gambali Seshasai Chaitanya</strong>, Inbasekaran Perumal, Joshua V. Gyllinsky, Kurt Keville</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 italic">Conference for Next Generation Arithmetic (CoNGA'25)</p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Poster Presentation</span>
+                                <!-- <a href="https://scholar.google.com/scholar?q=Evaluating+Numerical+Formats+HPC+Fractal+Benchmarks" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    Scholar
+                                </a> -->
+                                <a href="research/CoNGA25.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-teal-700 dark:text-teal-300 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                    PDF
+                                </a>
                             </div>
                         </div>
-                         <!-- Project Card -->
-                         <div class="p-6 bg-slate-50 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-                            <h3 class="text-lg font-semibold text-slate-900">Systolic Hardware Accelerator</h3>
-                            <p class="text-sm text-slate-500 mb-2">Udyam 24, IIT (BHU) - March 2024</p>
-                            <p class="flex-grow">Designed a hardware accelerator in Verilog for efficient matrix multiplications and convolutions, using an AXI-4 Interrupt controlled interface.</p>
-                            <div class="mt-4">
-                                <span class="inline-block bg-teal-100 text-teal-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Hardware Acceleration</span>
-                                <span class="inline-block bg-teal-100 text-teal-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">Verilog</span>
+
+                        <!-- NVMTS 2025 -->
+                        <div class="p-5 bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
+                            <h4 class="font-bold text-base text-slate-800 dark:text-slate-100 leading-snug">A Non-Volatile ReRAM and Subthreshold-FET-Based Kernel for Energy-Efficient Temporal Signal Processing Using Reservoir Computing</h4>
+                            <p class="text-slate-600 dark:text-slate-300 mt-1 text-sm"><strong>Gambali Seshasai Chaitanya</strong>, Ankit Arora</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 italic">23rd Non Volatile Memory Technology Symposium (NVMTS 2025)</p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Poster Presentation</span>
+                                <!-- <a href="https://scholar.google.com/scholar?q=Non-Volatile+ReRAM+Subthreshold-FET+Kernel+Reservoir+Computing+Temporal+Signal" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    Scholar
+                                </a> -->
+                                <a href="research/nvmts2025.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-teal-700 dark:text-teal-300 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                    PDF
+                                </a>
                             </div>
                         </div>
+
+                        <!-- EMC 2025 - Stress -->
+                        <div class="p-5 bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
+                            <h4 class="font-bold text-base text-slate-800 dark:text-slate-100 leading-snug">Stress Induced Failure Mechanism in NAND Flash Memory Devices</h4>
+                            <p class="text-slate-600 dark:text-slate-300 mt-1 text-sm"><strong>Gambali Seshasai Chaitanya</strong>, Arin Weling, Sandip Mondal</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 italic">Electronic Materials Conference 2025</p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Poster Presentation</span>
+                                <!-- <a href="https://scholar.google.com/scholar?q=Stress+Induced+Failure+Mechanism+NAND+Flash+Memory+Devices" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    Scholar
+                                </a> -->
+                                <a href="research/EMC/EMC_Chaitanya.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-teal-700 dark:text-teal-300 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                    PDF
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- EMC 2025 - Thermal -->
+                        <div class="p-5 bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
+                            <h4 class="font-bold text-base text-slate-800 dark:text-slate-100 leading-snug">Thermal-Induced Threshold Voltage Distribution Changes in 3D NAND Flash Cells: Experimental Characterization</h4>
+                            <p class="text-slate-600 dark:text-slate-300 mt-1 text-sm">Arin Weling, <strong>Gambali Seshasai Chaitanya</strong>, Sandip Mondal</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 italic">Electronic Materials Conference 2025</p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Oral Presentation</span>
+                                <!-- <a href="https://scholar.google.com/scholar?q=Thermal+Threshold+Voltage+Distribution+3D+NAND+Flash+Cells+Experimental+Characterization" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    Scholar
+                                </a> -->
+                                <a href="research/EMC/emc_arin.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-teal-700 dark:text-teal-300 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                    PDF
+                                </a>    
+                            </div>
+                        </div>
+
+                        <!-- EMC 2025 - Program Disturb -->
+                        <div class="p-5 bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
+                            <h4 class="font-bold text-base text-slate-800 dark:text-slate-100 leading-snug">Page and Block-wise Program Disturb Operation in NAND Flash Memory</h4>
+                            <p class="text-slate-600 dark:text-slate-300 mt-1 text-sm">Asifa Khatun, <strong>Gambali Seshasai Chaitanya</strong>, Sandip Mondal</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 italic">Electronic Materials Conference 2025</p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Poster Presentation</span>
+                                <!-- <a href="https://scholar.google.com/scholar?q=Page+Block-wise+Program+Disturb+Operation+NAND+Flash+Memory" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    Scholar
+                                </a> -->
+                                <a href="research/EMC/EMC_Asifa.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-teal-700 dark:text-teal-300 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                    PDF
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- SCES 2024 -->
+                        <div class="p-5 bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
+                            <h4 class="font-bold text-base text-slate-800 dark:text-slate-100 leading-snug">ReRAM-based Crossbar Compatible Equality Checker for Neuromorphic Applications</h4>
+                            <p class="text-slate-600 dark:text-slate-300 mt-1 text-sm"><strong>Gambali Seshasai Chaitanya</strong>, Shubham Pande, Ankit Arora</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 italic">8th Students' Conference on Engineering &amp; Systems (SCES-2024)</p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Oral Presentation</span>
+                                <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=aC66lQQAAAAJ&citation_for_view=aC66lQQAAAAJ:u5HHmVD_uO8C" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    Scholar
+                                </a>
+                                <a href="research/sces2024.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-teal-700 dark:text-teal-300 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                    PDF
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- IWPSD -->
+                        <div class="p-5 bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-l-4 border-teal-500">
+                            <h4 class="font-bold text-base text-slate-800 dark:text-slate-100 leading-snug">ReRAM Crossbar Compatible Efficient Equality Checker and Half Adder Implementation</h4>
+                            <p class="text-slate-600 dark:text-slate-300 mt-1 text-sm"><strong>Gambali Seshasai Chaitanya</strong>, Vaseekaran Elangovan</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 italic">XXII International Workshop on Physics of Semiconductor Devices (IWPSD)</p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <span class="bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">Oral Presentation</span>
+                                <!-- <a href="https://scholar.google.com/scholar?q=ReRAM+Crossbar+Equality+Checker+Half+Adder+Implementation+Semiconductor+Devices" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    Scholar
+                                </a> -->
+                                <a href="research/iwpsd2023.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-teal-50 dark:bg-teal-900/30 hover:bg-teal-100 dark:hover:bg-teal-900/50 text-teal-700 dark:text-teal-300 text-xs font-semibold px-2.5 py-0.5 rounded-full transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                    PDF
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
                 </section>
 
                 <!-- Achievements Section -->
                 <section id="achievements" class="fade-in-section">
-                    <h2 class="text-3xl font-bold text-slate-800 pb-2 mb-6">Achievements</h2>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500 mr-3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <span>3rd Prize Winner, National Level Digital Design Hackathon, MeitY C2S Program.</span>
-                        </li>
-                        <li class="flex items-center">
-                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500 mr-3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <span>International Finalist, Google Code-In 2019.</span>
-                        </li>
-                        <li class="flex items-center">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500 mr-3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <span>Winner, 'Startup with German' Scholarship, Goethe Institute.</span>
-                        </li>
-                        <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500 mr-3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <span>Winner of Times Scholar 2019.</span>
-                        </li>
-                        <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500 mr-3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <span>National Finalist in Hack AI, Techfest, IIT Bombay.</span>
-                        </li>
-                         <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500 mr-3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <span>2nd in FPGA-based round in I-Chip, Udyam'24, IIT (BHU) Varanasi.</span>
-                        </li>
-                        <li class="flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500 mr-3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <span>Finalist in Digisim, Udyam 24, EES IIT (BHU) Varanasi.</span>
-                        </li>
-                    </ul>
+                    <h2 class="text-3xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">Achievements</h2>
+                    <div class="h-1 w-14 bg-gradient-to-r from-teal-500 to-indigo-500 rounded-full mt-2 mb-6"></div>
+                    <div class="space-y-2.5">
+
+                        <div class="ach-card flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <div class="w-9 h-9 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700/30 flex items-center justify-center shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800 dark:text-slate-100 text-sm">3rd Prize — National Digital Design Hackathon, MeitY / C2S Program</p>
+                                <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">Ministry of Electronics &amp; IT of India, Chips to Startup Program</p>
+                            </div>
+                        </div>
+
+                        <div class="ach-card flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <div class="w-9 h-9 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700/30 flex items-center justify-center shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800 dark:text-slate-100 text-sm">International Finalist — Google Code-In 2019</p>
+                                <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">Out of 14,798 participants from 117 countries</p>
+                            </div>
+                        </div>
+
+                        <div class="ach-card flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <div class="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700/30 flex items-center justify-center shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800 dark:text-slate-100 text-sm">Winner — 'Startup with German' Scholarship, Goethe Institute</p>
+                                <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">Felicitated by <strong class="text-slate-600 dark:text-slate-300">Angela Merkel</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="ach-card flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <div class="w-9 h-9 rounded-lg bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-700/30 flex items-center justify-center shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800 dark:text-slate-100 text-sm">Winner — Times Scholar 2019</p>
+                                <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">Felicitated by VP of India, <strong class="text-slate-600 dark:text-slate-300">Shri Venkaiah Naidu</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="ach-card flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <div class="w-9 h-9 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700/30 flex items-center justify-center shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800 dark:text-slate-100 text-sm">National Finalist — Hack AI, Techfest IIT Bombay</p>
+                                <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">AI/ML Hackathon</p>
+                            </div>
+                        </div>
+
+                        <div class="ach-card flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <div class="w-9 h-9 rounded-lg bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-700/30 flex items-center justify-center shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-teal-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800 dark:text-slate-100 text-sm">2nd Place — I-Chip, FPGA/Verilog Event, Udyam'24</p>
+                                <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">EES IIT (BHU) Varanasi</p>
+                            </div>
+                        </div>
+
+                        <div class="ach-card flex items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                            <div class="w-9 h-9 rounded-lg bg-slate-100 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 flex items-center justify-center shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-500"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-slate-800 dark:text-slate-100 text-sm">Finalist — Digisim, Digital Electronics Event, Udyam'24</p>
+                                <p class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">EES IIT (BHU) Varanasi</p>
+                            </div>
+                        </div>
+
+                    </div>
                 </section>
 
             </main>
         </div>
-        <footer class="text-center text-sm text-slate-500 py-8">
-            Last updated: September 2025 | Built with Tailwind CSS
+
+        <footer class="text-center text-sm text-slate-400 dark:text-slate-500 py-8 flex flex-col items-center gap-1">
+            <span>Gambali Seshasai Chaitanya &nbsp;·&nbsp; March 2026</span>
+            <span class="text-xs text-slate-300 dark:text-slate-600">gseshasai.chaitanya.cd.ece22@iitbhu.ac.in</span>
         </footer>
     </div>
-    
-    <script>
-        // JavaScript for scroll animations
-        const sections = document.querySelectorAll('.fade-in-section');
 
+    <script>
+        // Dark mode toggle — persists preference in localStorage
+        const html = document.documentElement;
+        const toggleBtn = document.getElementById('theme-toggle');
+        const iconSun = document.getElementById('icon-sun');
+        const iconMoon = document.getElementById('icon-moon');
+
+        function setDark(isDark) {
+            html.classList.toggle('dark', isDark);
+            iconSun.classList.toggle('hidden', !isDark);
+            iconMoon.classList.toggle('hidden', isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Init from saved preference; default to dark
+        const saved = localStorage.getItem('theme');
+        setDark(saved ? saved === 'dark' : true);
+
+        toggleBtn.addEventListener('click', () => setDark(!html.classList.contains('dark')));
+
+        // Accordion — Experience cards
+        const expHeaders = document.querySelectorAll('.exp-header');
+        expHeaders.forEach((btn) => {
+            const card    = btn.closest('.exp-card');
+            const details = btn.nextElementSibling;
+            const chevron = btn.querySelector('.exp-chevron');
+
+            btn.addEventListener('click', () => {
+                const isOpen = details.style.maxHeight && details.style.maxHeight !== '0px';
+                if (isOpen) {
+                    details.style.maxHeight = '0px';
+                    chevron.classList.remove('rotated');
+                    card.classList.remove('is-open');
+                } else {
+                    details.style.maxHeight = details.scrollHeight + 'px';
+                    chevron.classList.add('rotated');
+                    card.classList.add('is-open');
+                }
+            });
+        });
+
+        // Scroll animations
+        const sections = document.querySelectorAll('.fade-in-section');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -319,16 +819,9 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.1
-        });
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
+        }, { threshold: 0.05 });
+        sections.forEach(section => observer.observe(section));
     </script>
 
 </body>
 </html>
-
-

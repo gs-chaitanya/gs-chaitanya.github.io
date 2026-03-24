@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Processing Pipeline on Pynq | Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' };</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in-section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+        .nav-link { position: relative; }
+        .nav-link::after { content:""; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:linear-gradient(90deg,#14b8a6,#6366f1); border-radius:999px; transition:width 0.25s cubic-bezier(0.4,0,0.2,1); }
+        .nav-link:hover::after { width:100%; }
+        .video-placeholder {
+            background: repeating-linear-gradient(45deg, rgba(15,23,42,0.06), rgba(15,23,42,0.06) 10px, rgba(15,23,42,0.02) 10px, rgba(15,23,42,0.02) 20px);
+        }
+        html.dark .video-placeholder {
+            background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.01) 10px, rgba(255,255,255,0.01) 20px);
+        }
+        html.dark body { background: linear-gradient(135deg, #020617 0%, #0f172a 60%, #1e1b4b 100%) !important; min-height: 100vh; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-100 via-white to-blue-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950/60 text-slate-700 dark:text-slate-300 transition-colors duration-300 min-h-screen">
+
+    <div class="max-w-4xl mx-auto my-8 lg:my-16 p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl shadow-slate-300/40 dark:shadow-slate-900/60 overflow-hidden">
+
+            <!-- Top bar -->
+            <div class="flex items-center justify-between px-8 py-4 border-b border-slate-200 dark:border-slate-700">
+                <a href="../projects.html" class="flex items-center gap-2 text-sm font-semibold text-slate-500 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    All Projects
+                </a>
+                <button id="theme-toggle" aria-label="Toggle dark mode" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+            </div>
+
+            <article class="p-8 lg:p-12">
+
+                <!-- Header -->
+                <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+                    <div>
+                        <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">Real Time Video Processing Pipeline on Pynq</h1>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">Xilinx Pynq-Z2 &nbsp;·&nbsp; Verilog and HLS</p>
+                    </div>
+                    <a href="https://github.com/gs-chaitanya/" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 bg-slate-800 dark:bg-slate-700 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-slate-700 dark:hover:bg-slate-600 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        GitHub
+                    </a>
+                </div>
+
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-300 text-xs font-semibold px-2.5 py-1 rounded-full">Pynq-Z2</span>
+                    <span class="bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-300 text-xs font-semibold px-2.5 py-1 rounded-full">Verilog / HLS</span>
+                    <span class="bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-300 text-xs font-semibold px-2.5 py-1 rounded-full">Xilinx Vivado</span>
+                    <span class="bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-300 text-xs font-semibold px-2.5 py-1 rounded-full">AXI4-Stream</span>
+                    <span class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold px-2.5 py-1 rounded-full">HDMI</span>
+                </div>
+
+                <!-- Video player -->
+                <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 mb-8 bg-slate-50 dark:bg-slate-800">
+                    <video controls class="w-full">
+                        <source src="../projects/img_zynq.mp4" type="video/mp4">
+                    </video>
+                    <div id="pynq-placeholder" class="video-placeholder flex flex-col items-center justify-center h-52 gap-3 text-slate-400 dark:text-slate-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+                        <p class="text-sm font-medium">Demo video coming soon</p>
+                        <p class="text-xs">Add <code class="bg-slate-200 dark:bg-slate-700 px-1 rounded">projects/pynq-video-pipeline.mp4</code> to activate</p>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-center mb-8">
+                    <div class="p-3 bg-teal-50 dark:bg-teal-900/20 rounded-lg">
+                        <p class="text-2xl font-bold text-teal-600 dark:text-teal-400">1080p</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Resolution</p>
+                    </div>
+                    <div class="p-3 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg">
+                        <p class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">60fps</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Frame Rate</p>
+                    </div>
+                    <!-- <div class="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                        <p class="text-2xl font-bold text-purple-600 dark:text-purple-400">1 cycle</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">HLS kernel II</p>
+                    </div> -->
+                    <div class="p-3 bg-sky-50 dark:bg-sky-900/20 rounded-lg">
+                        <p class="text-2xl font-bold text-sky-600 dark:text-sky-400">3 filters</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Switchable at runtime</p>
+                    </div>
+                </div>
+
+                <!-- Write-up -->
+                <div class="space-y-5 text-slate-600 dark:text-slate-300 leading-relaxed fade-in-section">
+                    <div class="p-5 bg-slate-50 dark:bg-slate-800 rounded-xl border-l-4 border-teal-500">
+                        <h2 class="font-semibold text-slate-800 dark:text-slate-100 mb-2">Overview</h2>
+                        <p>Built a real-time video processing pipeline on the Xilinx Pynq-Z2 board, utilixing custom FPGA IP for pixel-level operations at full 1080p frame rates. The pipeline takes live HDMI input, passes frames through programmable filter kernels implemented in PL (programmable logic), and outputs the processed stream over HDMI, at upto 60 FPS.</p>
+                    </div>
+
+                    <div class="p-5 bg-slate-50 dark:bg-slate-800 rounded-xl border-l-4 border-indigo-400">
+                        <h2 class="font-semibold text-slate-800 dark:text-slate-100 mb-2">Architecture</h2>
+                        <p>The design uses an <strong>AXI4-Stream</strong> video pipeline in the PL. Processing blocks include a Sobel edge detector, a configurable 3x3 convolution kernel (for blur/sharpen), and a pixel-wise threshold stage — all chained in hardware. Switching between filters happens at runtime without FPGA re-synthesis by toggling switches on the FPGA.</p>
+                    </div>
+
+                    <div class="p-5 bg-slate-50 dark:bg-slate-800 rounded-xl border-l-4 border-purple-400">
+                        <h2 class="font-semibold text-slate-800 dark:text-slate-100 mb-2">Key Technical Decisions</h2>
+                        <ul class="list-disc list-outside ml-4 space-y-1.5 mt-1">
+                            <li>Wrote a custom AXI-4 stream based IP and another version with Vivado HLS.</li>
+                            <li>Frame buffering handled in PS DDR rather than on-chip BRAM to avoid resource bottlenecks, with the DMA engine managing PL↔PS transfers.
+                        </ul>
+                    </div>
+                </div>
+
+            </article>
+        </div>
+    </div>
+
+    <script>
+        const html = document.documentElement;
+        const toggleBtn = document.getElementById('theme-toggle');
+        const iconSun = document.getElementById('icon-sun');
+        const iconMoon = document.getElementById('icon-moon');
+        function setDark(isDark) {
+            html.classList.toggle('dark', isDark);
+            iconSun.classList.toggle('hidden', !isDark);
+            iconMoon.classList.toggle('hidden', isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+        const saved = localStorage.getItem('theme');
+        setDark(saved ? saved === 'dark' : true);
+        toggleBtn.addEventListener('click', () => setDark(!html.classList.contains('dark')));
+
+        document.querySelectorAll('video').forEach(video => {
+            video.addEventListener('canplay', () => {
+                const p = video.nextElementSibling;
+                if (p) p.style.display = 'none';
+            });
+        });
+        const sections = document.querySelectorAll('.fade-in-section');
+        const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); } }), { threshold: 0.05 });
+        sections.forEach(s => obs.observe(s));
+    </script>
+</body>
+</html>
