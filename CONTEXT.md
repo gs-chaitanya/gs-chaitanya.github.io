@@ -233,23 +233,19 @@ else:
 ```
 
 ### 5.4 GitHub Pages Deployment
-The automated workflow is located at [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+The repository deploys to GitHub Pages via **branch deployment** on `main` at root `/`.
 
-To push and deploy:
+To build and deploy locally:
 ```bash
-# To test on hugo_trial:
-git push origin hugo_trial
-
-# To release live to main (GitHub Pages):
-git checkout main
-git merge hugo_trial
+./build.sh
+git add -A
+git commit -m "update site"
 git push origin main
 ```
-On push to `main`, GitHub Actions will:
-1. Check out repository with full submodule depth.
-2. Setup Hugo Extended v0.153.0.
-3. Build the site with `--minify`.
-4. Deploy the `public/` directory directly to GitHub Pages.
+`./build.sh` runs:
+1. `hugo --cleanDestinationDir --minify`
+2. Copies `public/*` and `.nojekyll` to root.
+3. GitHub Pages immediately serves the static site without Jekyll processing.
 
 ---
 
