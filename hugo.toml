@@ -15,7 +15,7 @@ title = 'Gambali Seshasai Chaitanya'
   linkedin = 'https://www.linkedin.com/in/gs-chaitanya'
   scholar = 'https://scholar.google.com/citations?user=aC66lQQAAAAJ&hl=en'
   avatar = 'cropped_circle_image.png'
-  resume = '2026_resume.pdf'
+  resume = 'Chaitanya_Gambali_Resume.pdf'
   description = 'Personal and academic portfolio of Gambali Seshasai Chaitanya, Silicon Engineer at Google and ECE Graduate from IIT (BHU) Varanasi.'
 
 [menu]
@@ -41,5 +41,5 @@ title = 'Gambali Seshasai Chaitanya'
     weight = 5
   [[menu.main]]
     name = 'CV'
-    url = '/2026_resume.pdf'
+    url = '/Chaitanya_Gambali_Resume.pdf'
     weight = 6
