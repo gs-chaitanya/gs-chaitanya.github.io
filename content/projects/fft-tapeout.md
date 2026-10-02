@@ -24,7 +24,4 @@ Architected a **64-point Fast Fourier Transform (FFT) module** in Verilog, tailo
 - **RTL Design**: Pipelined 64-point FFT architecture optimized for low gate count and minimal memory footprint.
 - **ASIC Flow**: Driven through the automated **OpenLane ASIC flow** from RTL specification, logic synthesis, floorplanning, placement, clock tree synthesis (CTS), to global and detailed routing.
 - **Silicon Fabrication**: Successfully taped out on **SkyWater 130nm** via the **TinyTapeout MPW shuttle**, achieving clean DRC, LVS, and static timing sign-off for manufacturing.
-
-## Source Code & Tapeout Files
-The complete Verilog RTL, testbenches, OpenLane configuration, and GDSII artifacts are publicly available on GitHub:
-👉 [**gs-chaitanya/FFT-tiny-tapeout** (main branch)](https://github.com/gs-chaitanya/FFT-tiny-tapeout/tree/main)
+- **Repository**: Full RTL, testbenches, and GDSII files are available on GitHub at [gs-chaitanya/FFT-tiny-tapeout](https://github.com/gs-chaitanya/FFT-tiny-tapeout/tree/main).
