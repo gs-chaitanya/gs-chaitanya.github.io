@@ -1,0 +1,34 @@
+- title: "3rd Prize — National Digital Design Hackathon, MeitY / C2S Program"
+  subtitle: "Ministry of Electronics & IT of India, Chips to Startup Program"
+  icon: "trophy"
+  color: "yellow"
+
+- title: "International Finalist — Google Code-In 2019"
+  subtitle: "Top finalist out of 14,798 global participants across 117 countries"
+  icon: "globe"
+  color: "blue"
+
+- title: "Winner — 'Startup with German' Scholarship, Goethe Institute"
+  subtitle: "Felicitated in person by German Chancellor Angela Merkel"
+  icon: "award"
+  color: "emerald"
+
+- title: "Winner — Times Scholar 2019"
+  subtitle: "Felicitated by Vice President of India, Shri M. Venkaiah Naidu"
+  icon: "medal"
+  color: "orange"
+
+- title: "National Finalist — Hack AI, Techfest IIT Bombay"
+  subtitle: "National-level AI/ML Hackathon at Asia's largest science & tech festival"
+  icon: "cpu"
+  color: "purple"
+
+- title: "2nd Place — I-Chip, FPGA/Verilog Design, Udyam'24"
+  subtitle: "Electrical Engineering Society, IIT (BHU) Varanasi"
+  icon: "trophy"
+  color: "teal"
+
+- title: "Finalist — Digisim, Digital Electronics Event, Udyam'24"
+  subtitle: "Electrical Engineering Society, IIT (BHU) Varanasi"
+  icon: "chip"
+  color: "slate"

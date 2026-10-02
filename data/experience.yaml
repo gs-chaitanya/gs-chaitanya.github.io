@@ -1,0 +1,83 @@
+- title: "Visiting Student Researcher"
+  org: "National University of Singapore"
+  advisor: "with Prof. Flavien Solt"
+  location: "Singapore"
+  period: "Jan 2026 – Present"
+  logo: "logos/NUS.jpg"
+  accent: "teal"
+  bullets:
+    - "Working towards developing FPGA-friendly approaches for microarchitectural side-channel analysis that eliminate the need for explicit Dynamic Information Flow Tracking."
+
+- title: "Visiting Student Researcher"
+  org: "University of California, Berkeley"
+  advisor: "with Prof. Christopher Fletcher"
+  location: "California, USA"
+  period: "Sept 2025 – Jan 2026"
+  logo: "logos/ucb.png"
+  accent: "indigo"
+  bullets:
+    - "Engaged in hardware security research to mitigate microarchitectural side-channel attacks by adapting the <em>MileSan</em> dynamic analysis framework for FPGA-accelerated RTL simulations."
+
+- title: "Software Development Intern"
+  org: "Google Summer of Code 2025 · OpenROAD"
+  location: "Remote"
+  period: "June – Sept 2025"
+  logo: "logos/gsoc.png"
+  accent: "teal"
+  bullets:
+    - "Contributed to <strong>OpenROAD</strong>, an open-source RTL2GDSII flow for digital IC design. Implemented end-to-end support for rectilinear floorplans inside the flow."
+    - "Modified user-facing TCL scripts, intermediate SWIG wrappers, and the backend C++ logic to support polygonal floorplans."
+
+- title: "Embedded Systems Intern"
+  org: "Jaguar Land Rover"
+  location: "Bengaluru, Karnataka"
+  period: "May – July 2025"
+  logo: "logos/JLR.png"
+  accent: "teal"
+  bullets:
+    - "Designed and implemented a <strong>secure two-stage bootloader architecture</strong> with Root of Trust and Digital Signature verification."
+    - "Incorporated <strong>AES decryption</strong> capabilities to protect sensitive IP in compiled firmware binaries."
+    - "Optimized the bootloader for low runtime memory usage and heap utilization for resource-constrained environments."
+
+- title: "Project Mentee"
+  org: "RISC-V Intl. @ Linux Foundation Mentorship"
+  advisor: "under Prof. Gyllinsky, Kurt Keville, Prof. Gustafson"
+  location: "Remote"
+  period: "Mar – June 2025"
+  logo: "logos/rv.png"
+  accent: "teal"
+  bullets:
+    - "Developed a Hardware Abstraction Layer Transitional Library for Software to Hardware Posits for RISC-V. Selected for the Spring 2025 term of the Linux Foundation Mentorship Program."
+    - "Improved and delivered a new version of the SoftPosit-cpp Library with native posit arithmetic; implemented math functions for 8, 16, and 32-bit posits with benchmarks and unit tests."
+    - "Created CI/CD pipelines for automated building and packaging, a Python Wrapper for SoftPosits, and a Debian Package."
+
+- title: "Software Development Intern"
+  org: "University of Michigan"
+  advisor: "with Prof. Mehdi Saligane"
+  location: "Remote"
+  period: "Nov 2024 – Mar 2025"
+  logo: "logos/umich.png"
+  accent: "purple"
+  bullets:
+    - "Worked on creating an ABC script to improve synthesis options in Yosys for creating a balanced synthesis plan, balancing between Speed and Area optimized synthesis."
+
+- title: "Software Development Intern"
+  org: "Google Summer of Code 2024 · Apertium"
+  location: "Remote"
+  period: "May – Aug 2024"
+  logo: "logos/gsoc.png"
+  accent: "teal"
+  bullets:
+    - "Contributed to <strong>Apertium</strong>, an open-source machine translation platform. Developed core tools with CLI utilities for automated bidirectional dictionary generation from parallel translated texts."
+    - "Experimented with word alignment methods including Bayesian models with Markov Chain Monte Carlo and Graph Neural Networks for multiparallel word alignment."
+
+- title: "Summer Research Intern"
+  org: "Indian Institute of Technology Bombay"
+  advisor: "with Prof. Sandip Mondal"
+  location: "Bombay, India"
+  period: "May – July 2024"
+  logo: "logos/iitb.png"
+  accent: "orange"
+  bullets:
+    - "Developed Verilog and Embedded C applications using Vivado and Xilinx SDK on a Digilent Zybo FPGA board for an <strong>FPGA-based controller</strong> to perform Read, Write, and Erase operations on 2D and 3D SLC and MLC raw NAND Flash Chips."
+    - "Used bit-banging to precisely control onboard GPIO pins via the ONFI Consortium Protocol. Developed programs in Embedded C on <strong>Embedded Linux</strong> on an Altera DE1 SoC."

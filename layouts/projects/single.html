@@ -1,0 +1,75 @@
+{{ define "main" }}
+<article style="padding: 1.5rem 0 4rem;">
+  <div class="project-single-header">
+    <a href="{{ "/projects/" | relURL }}" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      All Projects
+    </a>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+      <div>
+        <h1 class="project-single-title">{{ .Title }}</h1>
+        {{ with .Params.subtitle }}
+        <p class="project-single-subtitle">{{ . }}</p>
+        {{ end }}
+      </div>
+
+      {{ with .Params.github }}
+      <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="social-pill" style="padding: 0.5rem 1rem; font-weight: 600;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+        </svg>
+        <span>GitHub</span>
+      </a>
+      {{ end }}
+    </div>
+
+    <!-- Tags -->
+    <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem;">
+      {{ range .Params.tags }}
+      <span class="tag-pill" style="font-size: 0.78rem; padding: 0.2rem 0.6rem;">{{ . }}</span>
+      {{ end }}
+    </div>
+
+    <!-- Stats Grid if present -->
+    {{ with .Params.stats }}
+    <div class="stats-grid" style="margin: 1.75rem 0 1rem;">
+      {{ range . }}
+      <div class="stat-card">
+        <div class="stat-number" style="font-size: 1.25rem;">{{ .value }}</div>
+        <div class="stat-label">{{ .label }}</div>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+
+  <!-- Video if present -->
+  {{ with .Params.video }}
+  <div class="project-media-wrapper">
+    <video controls playsinline preload="metadata">
+      <source src="{{ . | relURL }}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  {{ end }}
+
+  <!-- Image if present -->
+  {{ with .Params.image }}
+  <div class="project-media-wrapper">
+    <img src="{{ . | relURL }}" alt="{{ $.Title }}">
+    {{ with $.Params.image_caption }}
+    <div class="project-caption">{{ . }}</div>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  <!-- Markdown Body -->
+  <div class="project-body">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

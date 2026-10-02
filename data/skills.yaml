@@ -1,0 +1,34 @@
+categories:
+  - name: "Languages"
+    items:
+      - "Verilog / SystemVerilog"
+      - "C / C++"
+      - "Python"
+      - "Embedded C"
+      - "TCL"
+      - "Bash"
+
+  - name: "EDA & Tooling"
+    items:
+      - "OpenROAD"
+      - "Cadence Virtuoso / Innovus"
+      - "Xilinx Vivado"
+      - "Xilinx SDK / Vitis"
+      - "Yosys"
+      - "SWIG"
+
+  - name: "Architectures & Protocols"
+    items:
+      - "RISC-V (RV32IM)"
+      - "Xilinx / Altera FPGAs"
+      - "Embedded Linux"
+      - "AXI-4 / AXI4-Stream"
+      - "ONFI Protocol"
+      - "Posit Arithmetic"
+
+topics:
+  - "Side-channel security & hardware taint tracking"
+  - "Neuromorphic computing (ReRAM, FeFET crossbars)"
+  - "Open-source EDA flows (OpenROAD, Yosys)"
+  - "FPGA-accelerated microarchitectural simulation"
+  - "Non-volatile memory controllers (NAND Flash)"

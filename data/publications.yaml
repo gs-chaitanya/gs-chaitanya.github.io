@@ -1,0 +1,101 @@
+journals:
+  - title: "An Energy-Efficient, CMOS-Compatible Physical Reservoir Node with Post-Fabrication Tunable Decay Dynamics"
+    authors: "<strong>Gambali Seshasai Chaitanya</strong>, Aditya D. Arkalgud, Shubham Pande, Ankit Arora"
+    venue: "IOP Neuromorphic Computing and Engineering"
+    year: "2025"
+    status: "Accepted"
+    badge: "Journal"
+    links:
+      - label: "IOP Science"
+        url: "https://iopscience.iop.org/article/10.1088/2634-4386/ae2155/meta"
+        icon: "external"
+      - label: "PDF"
+        url: "research/IOP.pdf"
+        icon: "pdf"
+
+conferences:
+  - title: "Adaptive FeFET-Based LIF Neuron for Regression Tasks on Spiking Neural Networks"
+    authors: "<strong>Gambali Seshasai Chaitanya</strong>, Aditya D. Arkalgud, Sourav De, Ankit Arora"
+    venue: "7th International Conference on Emerging Electronics (ICEE 2025)"
+    year: "2025"
+    presentation: "Oral Presentation"
+    links:
+      - label: "IEEE Xplore"
+        url: "https://ieeexplore.ieee.org/abstract/document/11409722"
+        icon: "external"
+      - label: "PDF"
+        url: "research/icee2025.pdf"
+        icon: "pdf"
+
+  - title: "Evaluating Numerical Formats for HPC Using Fractal Benchmarks"
+    authors: "João Pedro Cabral Miranda, <strong>Gambali Seshasai Chaitanya</strong>, Inbasekaran Perumal, Joshua V. Gyllinsky, Kurt Keville"
+    venue: "Conference for Next Generation Arithmetic (CoNGA'25)"
+    year: "2025"
+    presentation: "Poster Presentation"
+    links:
+      - label: "PDF"
+        url: "research/CoNGA25.pdf"
+        icon: "pdf"
+
+  - title: "A Non-Volatile ReRAM and Subthreshold-FET-Based Kernel for Energy-Efficient Temporal Signal Processing Using Reservoir Computing"
+    authors: "<strong>Gambali Seshasai Chaitanya</strong>, Ankit Arora"
+    venue: "23rd Non Volatile Memory Technology Symposium (NVMTS 2025)"
+    year: "2025"
+    presentation: "Poster Presentation"
+    links:
+      - label: "PDF"
+        url: "research/nvmts2025.pdf"
+        icon: "pdf"
+
+  - title: "Stress Induced Failure Mechanism in NAND Flash Memory Devices"
+    authors: "<strong>Gambali Seshasai Chaitanya</strong>, Arin Weling, Sandip Mondal"
+    venue: "Electronic Materials Conference 2025"
+    year: "2025"
+    presentation: "Poster Presentation"
+    links:
+      - label: "PDF"
+        url: "research/EMC/EMC_Chaitanya.pdf"
+        icon: "pdf"
+
+  - title: "Thermal-Induced Threshold Voltage Distribution Changes in 3D NAND Flash Cells: Experimental Characterization"
+    authors: "Arin Weling, <strong>Gambali Seshasai Chaitanya</strong>, Sandip Mondal"
+    venue: "Electronic Materials Conference 2025"
+    year: "2025"
+    presentation: "Oral Presentation"
+    links:
+      - label: "PDF"
+        url: "research/EMC/emc_arin.pdf"
+        icon: "pdf"
+
+  - title: "Page and Block-wise Program Disturb Operation in NAND Flash Memory"
+    authors: "Asifa Khatun, <strong>Gambali Seshasai Chaitanya</strong>, Sandip Mondal"
+    venue: "Electronic Materials Conference 2025"
+    year: "2025"
+    presentation: "Poster Presentation"
+    links:
+      - label: "PDF"
+        url: "research/EMC/EMC_Asifa.pdf"
+        icon: "pdf"
+
+  - title: "ReRAM-based Crossbar Compatible Equality Checker for Neuromorphic Applications"
+    authors: "<strong>Gambali Seshasai Chaitanya</strong>, Shubham Pande, Ankit Arora"
+    venue: "8th Students' Conference on Engineering & Systems (SCES-2024)"
+    year: "2024"
+    presentation: "Oral Presentation"
+    links:
+      - label: "Scholar"
+        url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=aC66lQQAAAAJ&citation_for_view=aC66lQQAAAAJ:u5HHmVD_uO8C"
+        icon: "scholar"
+      - label: "PDF"
+        url: "research/sces2024.pdf"
+        icon: "pdf"
+
+  - title: "ReRAM Crossbar Compatible Efficient Equality Checker and Half Adder Implementation"
+    authors: "<strong>Gambali Seshasai Chaitanya</strong>, Vaseekaran Elangovan"
+    venue: "XXII International Workshop on Physics of Semiconductor Devices (IWPSD)"
+    year: "2023"
+    presentation: "Oral Presentation"
+    links:
+      - label: "PDF"
+        url: "research/iwpsd2023.pdf"
+        icon: "pdf"

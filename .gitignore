@@ -1,1 +1,5 @@
 .under-construction
+public/
+resources/_gen/
+.hugo_build.lock
+preview-scheme*.html

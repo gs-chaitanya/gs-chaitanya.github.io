@@ -1,0 +1,40 @@
+{{ define "main" }}
+<div style="padding: 1.5rem 0 3.5rem;">
+  <div style="margin-bottom: 2rem;">
+    <a href="{{ site.Home.RelPermalink }}" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back to Home
+    </a>
+    <h1 style="font-size: 2.25rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.5rem;">Projects & Implementations</h1>
+    <p style="font-size: 1.05rem; color: var(--text-muted);">
+      Hardware design, FPGA accelerators, bare-metal controllers, and open-source EDA tooling.
+    </p>
+  </div>
+
+  <div class="projects-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+    {{ range .Pages.ByWeight }}
+    <a href="{{ .RelPermalink }}" class="project-card">
+      <div class="project-badge-row">
+        {{ with .Params.badge }}
+        <span class="project-badge">{{ . }}</span>
+        {{ end }}
+      </div>
+      <h2 class="project-title">{{ .Title }}</h2>
+      <p class="project-desc">{{ .Params.summary }}</p>
+      <div class="project-tags">
+        {{ range .Params.tags }}
+        <span class="tag-pill">{{ . }}</span>
+        {{ end }}
+      </div>
+      <div class="project-footer">
+        <span>Read full project breakdown</span>
+        <span class="project-arrow">→</span>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
