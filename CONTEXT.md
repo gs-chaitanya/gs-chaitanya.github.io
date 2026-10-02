@@ -76,17 +76,18 @@ gs-chaitanya.github.io/
 │   ├── _index.md                   # Bio, research statement, and affiliations
 │   └── projects/
 │       ├── _index.md               # Projects listing page (alias: /projects.html)
+│       ├── fft-tapeout.md          # 64-point FFT on SkyWater 130nm via TinyTapeout
 │       ├── pynq-video-pipeline.md   # 1080p 60fps video processing (alias: /projects/pynq-video-pipeline.html)
 │       ├── nand-controller.md       # FPGA raw NAND flash controller (alias: /projects/nand-controller.html)
 │       ├── risc-v-cpu.md            # RV32IM 5-stage CPU & 130nm ASIC (alias: /projects/risc-v-cpu.html)
 │       ├── nn-fpga.md               # Neural Network FPGA edge inference
 │       └── systolic-accelerator.md  # Systolic hardware matrix unit (Udyam'24 2nd Prize)
 ├── data/
-│   ├── experience.yaml             # All 8 research & engineering appointments
+│   ├── experience.yaml             # All 9 research & engineering appointments (including Google TPU Emulation)
 │   ├── publications.yaml           # Journal & conference papers with action pills
-│   ├── education.yaml              # Degrees, institutes, grades, graduation years
+│   ├── education.yaml              # Degrees, institutes, grades (CGPA 8.45), graduation years
 │   ├── achievements.yaml           # Hackathon, scholarship, and competition honors
-│   └── skills.yaml                 # Categorized technical skills & research interests
+│   └── skills.yaml                 # Categorized technical skills & research interests (archived/reusable)
 ├── layouts/
 │   ├── _default/
 │   │   ├── baseof.html             # Base layout shell

@@ -1,12 +1,19 @@
+- title: "Silicon Engineer (Emulation)"
+  org: "Google"
+  location: "Bengaluru, Karnataka"
+  period: "June 2026 – Present"
+  logo: "logos/google.svg"
+  bullets:
+    - "Architecting emulation models and platform enablement pipelines for next-generation TPUs, streamlining pre-silicon verification and firmware bring-up."
+
 - title: "Visiting Student Researcher"
   org: "National University of Singapore"
   advisor: "with Prof. Flavien Solt"
   location: "Singapore"
-  period: "Jan 2026 – Present"
+  period: "Jan – June 2026"
   logo: "logos/NUS.jpg"
-  accent: "teal"
   bullets:
-    - "Working towards developing FPGA-friendly approaches for microarchitectural side-channel analysis that eliminate the need for explicit Dynamic Information Flow Tracking."
+    - "Implemented a pre-silicon framework to detect microarchitectural transient execution vulnerabilities (e.g., Spectre-style side channels) on RISC-V cores. Designed instrumentation-free taint-tracking logic to trace transient leaks."
 
 - title: "Visiting Student Researcher"
   org: "University of California, Berkeley"
@@ -14,42 +21,37 @@
   location: "California, USA"
   period: "Sept 2025 – Jan 2026"
   logo: "logos/ucb.png"
-  accent: "indigo"
   bullets:
-    - "Engaged in hardware security research to mitigate microarchitectural side-channel attacks by adapting the <em>MileSan</em> dynamic analysis framework for FPGA-accelerated RTL simulations."
+    - "Ported Cell-IFT instrumented RISC-V cores onto Xilinx Alveo U250 FPGAs to accelerate microarchitectural side-channel leakage analysis using the MileSan dynamic framework."
 
 - title: "Software Development Intern"
   org: "Google Summer of Code 2025 · OpenROAD"
   location: "Remote"
   period: "June – Sept 2025"
   logo: "logos/gsoc.png"
-  accent: "teal"
   bullets:
-    - "Contributed to <strong>OpenROAD</strong>, an open-source RTL2GDSII flow for digital IC design. Implemented end-to-end support for rectilinear floorplans inside the flow."
-    - "Modified user-facing TCL scripts, intermediate SWIG wrappers, and the backend C++ logic to support polygonal floorplans."
+    - "Extended OpenROAD's physical design flow to support rectilinear floorplans, enabling non-rectangular floorplanning across physical layout steps."
+    - "Refactored C++ backend geometry logic, updated SWIG interfaces, and exposed user-facing Tcl commands to support polygonal boundary specifications."
 
 - title: "Embedded Systems Intern"
   org: "Jaguar Land Rover"
   location: "Bengaluru, Karnataka"
   period: "May – July 2025"
   logo: "logos/JLR.png"
-  accent: "teal"
   bullets:
-    - "Designed and implemented a <strong>secure two-stage bootloader architecture</strong> with Root of Trust and Digital Signature verification."
-    - "Incorporated <strong>AES decryption</strong> capabilities to protect sensitive IP in compiled firmware binaries."
-    - "Optimized the bootloader for low runtime memory usage and heap utilization for resource-constrained environments."
+    - "Built a secure two-stage bootloader with Root of Trust verification and AES decryption on ARM Cortex-M7 microcontrollers to protect sensitive firmware IP."
+    - "Optimized bootloader footprint from 8 KB to 3 KB by tuning linker scripts and section placement for resource-constrained automotive microcontrollers."
 
 - title: "Project Mentee"
   org: "RISC-V Intl. @ Linux Foundation Mentorship"
-  advisor: "under Prof. Gyllinsky, Kurt Keville, Prof. Gustafson"
+  advisor: "Spring 2025 Mentorship Program"
   location: "Remote"
   period: "Mar – June 2025"
   logo: "logos/rv.png"
-  accent: "teal"
   bullets:
-    - "Developed a Hardware Abstraction Layer Transitional Library for Software to Hardware Posits for RISC-V. Selected for the Spring 2025 term of the Linux Foundation Mentorship Program."
-    - "Improved and delivered a new version of the SoftPosit-cpp Library with native posit arithmetic; implemented math functions for 8, 16, and 32-bit posits with benchmarks and unit tests."
-    - "Created CI/CD pipelines for automated building and packaging, a Python Wrapper for SoftPosits, and a Debian Package."
+    - "Developed a Hardware Abstraction Layer Transitional Library for Software to Hardware Posits For RISC-V."
+    - "Delivered an upgraded version of SoftPosit-cpp library with native support for 8-bit, 16-bit, and 32-bit Posit math functions, comprehensive unit tests, and performance benchmarks."
+    - "Built CI/CD pipelines and packaging automation using GitHub Actions, along with a Python wrapper for the library."
 
 - title: "Software Development Intern"
   org: "University of Michigan"
@@ -57,7 +59,6 @@
   location: "Remote"
   period: "Nov 2024 – Mar 2025"
   logo: "logos/umich.png"
-  accent: "purple"
   bullets:
     - "Worked on creating an ABC script to improve synthesis options in Yosys for creating a balanced synthesis plan, balancing between Speed and Area optimized synthesis."
 
@@ -66,10 +67,8 @@
   location: "Remote"
   period: "May – Aug 2024"
   logo: "logos/gsoc.png"
-  accent: "teal"
   bullets:
-    - "Contributed to <strong>Apertium</strong>, an open-source machine translation platform. Developed core tools with CLI utilities for automated bidirectional dictionary generation from parallel translated texts."
-    - "Experimented with word alignment methods including Bayesian models with Markov Chain Monte Carlo and Graph Neural Networks for multiparallel word alignment."
+    - "Contributed to Apertium, an open source machine translation platform. Developed command-line utilities to construct bidirectional dictionaries for a language pair, given a pair of parallel corpora - i.e., the same content in two different languages."
 
 - title: "Summer Research Intern"
   org: "Indian Institute of Technology Bombay"
@@ -77,7 +76,6 @@
   location: "Bombay, India"
   period: "May – July 2024"
   logo: "logos/iitb.png"
-  accent: "orange"
   bullets:
-    - "Developed Verilog and Embedded C applications using Vivado and Xilinx SDK on a Digilent Zybo FPGA board for an <strong>FPGA-based controller</strong> to perform Read, Write, and Erase operations on 2D and 3D SLC and MLC raw NAND Flash Chips."
-    - "Used bit-banging to precisely control onboard GPIO pins via the ONFI Consortium Protocol. Developed programs in Embedded C on <strong>Embedded Linux</strong> on an Altera DE1 SoC."
+    - "Developed Embedded C-based applications using Vivado and Xilinx SDK to run on a Digilent Zybo FPGA, creating an FPGA-based controller to perform Read, Write, and Erase Operations on 2D and 3D SLC and MLC raw NAND Flash Chips."
+    - "Used bit-banging to precisely control the onboard GPIO pins to interface with the Raw NAND using the ONFI Consortium Protocol."

@@ -4,10 +4,10 @@ title = 'Gambali Seshasai Chaitanya'
 
 [params]
   author = 'Gambali Seshasai Chaitanya'
-  tagline = 'Electronics & Communication Engineering'
+  tagline = 'Silicon Engineer (Emulation) at Google · IIT (BHU) Varanasi'
   subtagline = 'Hardware Security · Neuromorphic Computing · Open EDA'
   institution = 'Indian Institute of Technology (BHU) Varanasi'
-  status = 'Visiting Student Researcher at NUS, Singapore'
+  status = 'Silicon Engineer (Emulation) at Google'
   status_active = true
   email = 'gseshasai.chaitanya.cd.ece22@iitbhu.ac.in'
   phone = '+91-9350329257'
@@ -16,7 +16,7 @@ title = 'Gambali Seshasai Chaitanya'
   scholar = 'https://scholar.google.com/citations?user=aC66lQQAAAAJ&hl=en'
   avatar = 'cropped_circle_image.png'
   resume = '2026_resume.pdf'
-  description = 'Personal and academic portfolio of Gambali Seshasai Chaitanya, final-year ECE undergrad at IIT (BHU) Varanasi and visiting researcher at NUS.'
+  description = 'Personal and academic portfolio of Gambali Seshasai Chaitanya, Silicon Engineer at Google and ECE Graduate from IIT (BHU) Varanasi.'
 
 [menu]
   [[menu.main]]

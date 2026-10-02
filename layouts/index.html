@@ -232,7 +232,7 @@
       </svg>
       Selected Projects
     </h2>
-    <a href="{{ "/projects/" | relURL }}" class="section-subtitle" style="color: var(--accent); font-weight: 600;">View All (5) →</a>
+    <a href="{{ "/projects/" | relURL }}" class="section-subtitle" style="color: var(--accent); font-weight: 600;">View All ({{ len (where site.RegularPages "Section" "projects") }}) →</a>
   </div>
 
   <div class="projects-grid">
@@ -291,41 +291,6 @@
   </div>
 </section>
 
-<!-- Technical Skills & Research Topics -->
-<section class="section-block" id="skills">
-  <div class="section-header">
-    <h2 class="section-title">
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="color: var(--text-muted);" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="16 18 22 12 16 6"></polyline>
-        <polyline points="8 6 2 12 8 18"></polyline>
-      </svg>
-      Skills & Focus Areas
-    </h2>
-    <span class="section-subtitle">Tooling & Topics</span>
-  </div>
-
-  <div class="skills-container">
-    {{ range site.Data.skills.categories }}
-    <div class="skill-category">
-      <div class="skill-category-title">{{ .name }}</div>
-      <div class="skill-pills">
-        {{ range .items }}
-        <span class="skill-pill">{{ . }}</span>
-        {{ end }}
-      </div>
-    </div>
-    {{ end }}
-
-    <div class="skill-category">
-      <div class="skill-category-title">Research Topics & Inquiries</div>
-      <div class="skill-pills">
-        {{ range site.Data.skills.topics }}
-        <span class="skill-pill" style="border-radius: 0.5rem; font-size: 0.84rem;">• {{ . }}</span>
-        {{ end }}
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- Education -->
 <section class="section-block" id="education">
